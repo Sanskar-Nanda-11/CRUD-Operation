@@ -6,7 +6,7 @@ export const itemService = {
 
     getDataById: (id) =>api.get(`/student/${id}`),  // Fetch a single item by ID
 
-    createnewdata: () =>api.post("/student/create"),  // Create a new item
+    createnewdata: (data) =>api.post("/student/create", data),  // Create a new item
 
     updatedata: (id, data) =>api.put(`/student/update/${id}`, data),  // Update an existing item by ID
 
