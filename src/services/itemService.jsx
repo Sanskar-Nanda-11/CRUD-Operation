@@ -6,10 +6,10 @@ export const itemService = {
 
     getDataById: (id) =>api.get(`/student/${id}`),  // Fetch a single item by ID
 
-    createnewdata: (data) =>api.post("/student/create", data),  // Create a new item
+    createNewData: (data) =>api.post("/student/create", data),  // Create a new item
 
-    updatedata: (id, data) =>api.put(`/student/update/${id}`, data),  // Update an existing item by ID
+    updateData: (id, data) =>api.put(`/student/update/${id}`, data),  // Update an existing item by ID
 
-    deletedata: (id) =>api.delete(`/student/delete/${id}`),  // Delete an item by ID
+    deleteData: (id) =>api.delete(`/student/delete/${id}`),  // Delete an item by ID
 
 };  // Initialize the itemService object
