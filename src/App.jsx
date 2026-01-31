@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Navbar from './components/Navbar.jsx'
-import './App.css'
+// import './App.css'
 import StudentList from './components/StudentList.jsx'
 import { itemService } from './services/itemService.jsx'
 
 function App() {
 
-  const[students , setStudents] = useState([]);
+  const[students , setStudents] = useState([]);  {/* initial state is an empty array but will hold the list of students later on  */}
   useEffect(() => {
 
     return () => {
@@ -18,15 +18,15 @@ function App() {
   
   const loadStudents = async () => {
     try {
-      const response = await itemService.getAllData();
-      setStudents(response.data);
+      const response = await itemService.getAllData();    {/* Fetch all students from the backend service */}
+      setStudents(response.data);                           {/* Update the state with the fetched student data */}
     } catch (error) {
       console.error("Failed To Faitch Students" , error);
     }
   };
 
   const handledelete = async (id) =>{
-    if (window.confirm("Delete this Student ?")) {
+    if (window.confirm("Delete this Student ?")) {          /* Confirmation dialog before deletion */
       await itemService.deleteData(id);
       loadStudents();     // Refresh the list after deletion
     }
@@ -36,7 +36,7 @@ function App() {
       <div className='min-h-screen bg-slate-50'>
         <Navbar />
         <main className='container mx-auto px-6 px-8'>
-      <StudentList students={students} onDelete={handledelete} />
+      <StudentList students={students} onDelete={handledelete} />           {/* Pass the student data and delete handler to the StudentList component  */}
         </main>
       </div>
     </>
