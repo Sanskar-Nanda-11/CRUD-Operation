@@ -8,6 +8,7 @@ import { itemService } from './services/itemService.jsx'
 
 function App() {
 
+  const [IsModelopen, setIsModelopen] = useState(false);
   const[students , setStudents] = useState([]);  {/* initial state is an empty array but will hold the list of students later on  */}
   useEffect(() => {
 

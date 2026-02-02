@@ -24,7 +24,7 @@ import { Edit , Trash2 , User } from 'lucide-react';
                   <div className='h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 '>
                     <user size={20}/> {/* an user profile icon , with the size in pixle */}
                   </div>
-                  <span className=' font-medium pink '> {students.name}</span>
+                  <span className=' font-medium text-slate-700 '> {students.s_name}</span>
                 </div>
               </td>
               <td className='px-6 py-4 text-slate-500 font-mono text-sm'>{students.id}</td>
