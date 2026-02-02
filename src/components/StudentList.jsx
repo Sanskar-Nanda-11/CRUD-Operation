@@ -22,7 +22,7 @@ import { Edit , Trash2 , User } from 'lucide-react';
                 <td className='px-6 py-4'>
                 <div className='flex items-center gap-3'>                          {/* Child color changes due to hover happend for applying group on parent  */}
                   <div className='h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 '>
-                    <user size={20}/> {/* an user profile icon , with the size in pixle */}
+                    <User size={20}/> {/* an user profile icon , with the size in pixle */}
                   </div>
                   <span className=' font-medium text-slate-700 '> {students.s_name}</span>
                 </div>

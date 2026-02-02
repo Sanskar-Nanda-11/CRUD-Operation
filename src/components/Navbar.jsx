@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import onAddMember from '../App.jsx'
 
 
-const Navbar = () => {
+const Navbar = (onAddMember) => {
 
   const [isopen, setisopen] = useState(false);
 
@@ -20,7 +21,7 @@ const Navbar = () => {
           <div className="flex gap-6 items-center">
             <a href="" className='text-slate-600 hover:text-indigo-600 transition-colours'> Home </a>
             <a href="" className='text-slate-600 hover:text-indigo-600 transition-colours'> Analysis </a>
-            <a href=""> <button className='bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors PlusCircle hover:cursor-pointer'> Add Member </button></a>
+            <a href=""> <button type='button' onClick={onAddMember}className='bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors PlusCircle hover:cursor-pointer'> Add Member </button></a>
           </div>
         </div>
       </nav>
