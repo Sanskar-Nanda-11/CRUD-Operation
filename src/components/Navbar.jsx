@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import onAddMember from '../App.jsx'
 
 
-const Navbar = (onAddMember) => {
+const Navbar = ({onAddMember}) => {
 
   const [isopen, setisopen] = useState(false);
 
