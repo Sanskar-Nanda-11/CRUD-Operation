@@ -9,9 +9,23 @@ import StudentsModel from './components/StudentsModel.jsx'
 
 function App() {
 
+  const [selectedUser, setselectedUser] = useState(null);  {/* State to hold the currently selected user, initialized to null  */}
+
+  const openEditModel = (user) => {
+    setselectedUser(user);
+    setIsModelopen(true);
+  }
+
+
+  const handleClose = ( ) => {
+    setselectedUser(null);
+    setIsModelopen(false);  
+  }
+
   const [IsModelopen, setIsModelopen] = useState(false);
 
   const OpenModel =() =>{
+    console.log(" Open Model Function Called ");
     setIsModelopen(true);  // Open the modal dialog
   }
 
@@ -37,7 +51,7 @@ function App() {
   };
 
   const handledelete = async (id) =>{
-    if (window.confirm("Delete this Student ?")) {          /* Confirmation dialog before deletion */
+    if (window.confirm("Delete this Student 🤔😢 ?")) {          {/* Confirmation dialog before deletion */}
       await itemService.deleteData(id);
       loadStudents();     // Refresh the list after deletion
     }
