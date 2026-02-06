@@ -9,20 +9,27 @@ import StudentsModel from './components/StudentsModel.jsx'
 
 function App() {
 
-  const [selectedUser, setselectedUser] = useState(null);  {/* State to hold the currently selected user, initialized to null  */}
+  const [selectedStudent, setSelectedStudent] = useState(null);  {/* State to hold the currently selected student, initialized to null  */}
+  const [IsModelopen, setIsModelopen] = useState(false);
 
-  const openEditModel = (user) => {
-    setselectedUser(user);
+  // const openEditModel = (student) => {
+  //   setSelectedStudent(student);
+  //   setIsModelopen(true);
+  // }
+
+  const handleEdit = (Student) => {
+    console.log(" App received student",Student);
+    setSelectedStudent(Student);
     setIsModelopen(true);
   }
 
 
   const handleClose = ( ) => {
-    setselectedUser(null);
+    setSelectedStudent(null);
     setIsModelopen(false);  
   }
 
-  const [IsModelopen, setIsModelopen] = useState(false);
+  
 
   const OpenModel =() =>{
     console.log(" Open Model Function Called ");
@@ -61,9 +68,9 @@ function App() {
       <div className='min-h-screen bg-slate-50'>
         <Navbar onAddMember={OpenModel} />
         <main className='container mx-auto px-6 px-8'>
-      <StudentList students={students} onDelete={handledelete} />           {/* Pass the student data and delete handler to the StudentList component  */}
+      <StudentList students={students} onDelete={handledelete} onEdit={handleEdit}/>           {/* Pass the student data and delete handler to the StudentList component  */}
         </main>
-        <StudentsModel isOpen={IsModelopen} onClose={CloseModel} />   {/* Modal dialog for adding a new student  */}
+        <StudentsModel isOpen={IsModelopen} onClose={CloseModel} selectedStudent={selectedStudent}/>   {/* Modal dialog for adding a new student  */}
       </div>
     </>
   );

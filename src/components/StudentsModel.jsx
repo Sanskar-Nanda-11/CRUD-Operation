@@ -5,7 +5,7 @@ import itemService from '../services/itemService'; // Importing a service to han
 import { X } from 'lucide-react'; // Importing an 'X' icon from the lucide-react library for closing the modal
 
 
-const StudentsModel = ({ isOpen, onClose , selectedUser}) => {
+const StudentsModel = ({ isOpen, onClose, selectedstudent }) => {
     // if(!isOpen == null)
 
     console.log(" Model received as ", isOpen);
@@ -18,17 +18,17 @@ const StudentsModel = ({ isOpen, onClose , selectedUser}) => {
         s_addmission_date: ''
     });
 
-    useEffect = () => {
-        if(selectedUser){
-            setFormData(selectedUser);
-        }else{
-            setFormData({s_name:"",s_father_name:"",s_mother_name:"",s_phone_number:"",s_addmission_date:""});
+    useEffect (() => {
+        if (selectedstudent && isOpen) {
+            setFormData(selectedstudent);
+        } else {
+            setFormData({ s_name: "", s_father_name: "", s_mother_name: "", s_phone_number: "", s_addmission_date: "" });
         }
-    },([selectedUser , isOpen]);
+    }, [selectedstudent, isOpen]);
 
     const handleChange = (e) => {                            // Event handler for input field changes
         const { name, value } = e.target;    // Destructuring name and value from the event target (input field)
-        
+
         // if(name === "s_phone_number"){
         //     const pure_value = value.replace(/[^\d+]/g, " ");
 
@@ -40,7 +40,7 @@ const StudentsModel = ({ isOpen, onClose , selectedUser}) => {
         // }else{
         //     setFormData({...formData , [name] : value});
         // }
-        
+
 
         setFormData({                                          // Updating the formData state with new values
             ...formData,                        // Spread operator to copy existing formData properties
@@ -52,13 +52,19 @@ const StudentsModel = ({ isOpen, onClose , selectedUser}) => {
         e.preventDefault();
 
         try {
-            await itemService.createNewData(formData);                               // Sending form data to the backend service to add a new student
-            alert(" Data Created Successfully 🎉");
+            if (selectedstudent) {
+                await itemService.createNewData(formData);                               //  Sending form data to the backend service to add a new student
+                alert(" User Created Successfully 🎉");
+            } else {
+                await itemService.updateData(selectedstudent.id , formData);
+                alert(" User Updated Successfully ")                            // Sending form data to the backend service to update a new student
+            }
             onClose();                                  // Close the modal after successful submission
             window.location.reload(); // Here it will refresh whole page to see the new data 
+
         } catch (error) {
             console.error(" Connection Failed 😢 ", error);
-            alert("Failed to add data. Please try again.");
+            alert("Failed to add or update data. Please try again.");
         }
     };
 
@@ -81,23 +87,23 @@ const StudentsModel = ({ isOpen, onClose , selectedUser}) => {
                             <p className='text-slate-500 text-sm'>Enter the details bellow to add your data on EduFlow system.</p>
                             <div >
                                 <label htmlFor="nameoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's Name </label>
-                                <input id="nameoftheuser" type="text" name='s_name' value={formData.s_name} onChange={handleChange} placeholder='e.g. Ashok Tripathi ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required/>
+                                <input id="nameoftheuser" type="text" name='s_name' value={formData.s_name} onChange={handleChange} placeholder='e.g. Ashok Tripathi ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required />
                             </div>
                             <div >
                                 <label htmlFor="mothersoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's  Mother's Name </label>
-                                <input id="mothersoftheuser" type="text" name='s_mother_name' value={formData.s_mother_name} onChange={handleChange} placeholder='e.g. Tulasi Tripathi ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required/>
+                                <input id="mothersoftheuser" type="text" name='s_mother_name' value={formData.s_mother_name} onChange={handleChange} placeholder='e.g. Tulasi Tripathi ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required />
                             </div>
                             <div >
                                 <label htmlFor="fathersoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's  Father's Name </label>
-                                <input id="fathersoftheuser" type="text" name='s_father_name' value={formData.s_father_name} onChange={handleChange} placeholder='e.g. Rama Krushna Tripathi ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required/>
+                                <input id="fathersoftheuser" type="text" name='s_father_name' value={formData.s_father_name} onChange={handleChange} placeholder='e.g. Rama Krushna Tripathi ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required />
                             </div>
                             <div >
                                 <label htmlFor="phonenumbersoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's Phone Number </label>
-                                <input id="phonenumbersoftheuser" type="number" name='s_phone_number' value={formData.s_phone_number} onChange={handleChange} placeholder='e.g. 9876543210 ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required minLength={0} maxLength={10} pattern="[0-9]*"/>
+                                <input id="phonenumbersoftheuser" type="number" name='s_phone_number' value={formData.s_phone_number} onChange={handleChange} placeholder='e.g. 9876543210 ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required minLength={0} maxLength={10} pattern="[0-9]*" />
                             </div>
                             <div >
                                 <label htmlFor="addmissiondateoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's Addmission Date </label>
-                                <input id="addmissiondateoftheuser" type="date" name='s_addmission_date' value={formData.s_addmission_date} onChange={handleChange} placeholder='e.g. Ashok Tripathi ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required/>
+                                <input id="addmissiondateoftheuser" type="date" name='s_addmission_date' value={formData.s_addmission_date} onChange={handleChange} placeholder='e.g. Ashok Tripathi ' className='w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ' required />
                             </div>
                             <div className='flex gap-3 mt-8'>
                                 <button type='button' onClick={onClose} className='flex-1 px-4 py-2 border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors '> Cancel

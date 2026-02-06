@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import onEdit from '../App.jsx';
+import onDelete from '../App.jsx';
 import { Edit , Trash2 , User } from 'lucide-react';
 
   const StudentList = ({students , onDelete }) => {
@@ -35,7 +37,7 @@ import { Edit , Trash2 , User } from 'lucide-react';
                 </td>   
               <td className='px-6 px-4 text-right'>
                 <div className='flex justify-end gap-3'>
-                  <button className='text-slate-400 hover:text-indigo-600 transition-colors'>
+                  <button className='text-slate-400 hover:text-indigo-600 transition-colors' onClick={()=> onEdit(students)}>
                     <Edit size={18} /> {/* an edit icon , with the size in pixle */}
                   </button>
                   <button onClick={()=> onDelete(students.id)} className='text-slate-600 hover:text-slate-600 transition-colors'>
