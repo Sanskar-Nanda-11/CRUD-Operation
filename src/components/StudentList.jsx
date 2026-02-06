@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
-import onEdit from '../App.jsx';
-import onDelete from '../App.jsx';
-import { Edit , Trash2 , User } from 'lucide-react';
+// import onEdit from '../App.jsx';
+// import onDelete from '../App.jsx';
+import App from '../App';
+import { Edit , Trash2 , User , Eye } from 'lucide-react';
 
-  const StudentList = ({students , onDelete }) => {
+  const StudentList = ({students ,onDelete , onEdit , onview}) => {
 
     return (
       <>
@@ -42,6 +43,9 @@ import { Edit , Trash2 , User } from 'lucide-react';
                   </button>
                   <button onClick={()=> onDelete(students.id)} className='text-slate-600 hover:text-slate-600 transition-colors'>
                     <Trash2 size={20}/>
+                  </button>
+                  <button onClick={()=> onview(students)} className='text-slate-400 hover:text-slate-600 transition-colors'>
+                    <Eye size={18}/>
                   </button>
                 </div>
               </td>
