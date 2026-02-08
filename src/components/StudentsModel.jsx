@@ -29,8 +29,11 @@ const StudentsModel = ({ isOpen, onClose, selectedStudent, ViewOnly
     }, [selectedStudent, isOpen]);
 
     const handleChange = (e) => {                            // Event handler for input field changes
-        const { name, value } = e.target;    // Destructuring name and value from the event target (input field)
+        // const { name, value } = e.target;    // Destructuring name and value from the event target (input field)
+        
+        if (ViewOnly) return; // Prevent changes if in view-only mode
 
+        
         // if(name === "s_phone_number"){
         //     const pure_value = value.replace(/[^\d+]/g, " ");
 
@@ -79,7 +82,7 @@ const StudentsModel = ({ isOpen, onClose, selectedStudent, ViewOnly
                 <div className='relative bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all'>
                     <div className='p-6'>
                         {/* <div className='flex justify-between items-center mb-6'> */}
-                        <h2 className='text-xl font-bold text-slate-800 mb-6 inline'> { ViewOnly ? "Students Details" : " Add Users Details Here" }</h2>
+                        <h2 className='text-xl font-bold text-slate-800 mb-6 inline'> { ViewOnly ? "Students Details" : selectedStudent ? " Add Users Details Here" : " Edit Users Details Here "}</h2>
                         {/* <h2 className='text-xl font-bold text-slate-800 md-6'>
                             {ViewOnly ? " Student Details "}
                         </h2> */}
@@ -92,32 +95,32 @@ const StudentsModel = ({ isOpen, onClose, selectedStudent, ViewOnly
                         <form onSubmit={handleSubmit} className='space-y-4'>
                             <p className='text-slate-500 text-sm'>Enter the details bellow to add your data on EduFlow system.</p>
                             <div >
-                                <label htmlFor="nameoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's Name </label>
-                                <input id="nameoftheuser" type="text" name='s_name' value={formData.s_name} readOnly={ViewOnly} onChange={handleChange} placeholder='e.g. Ashok Tripathi ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg ${ViewOnly ? 'bg-slate-500' : 'bg-white' }`}required />
+                                <label htmlFor="nameoftheuser" className='text-slate-700 text-sm font-medium mb-1 block'> User's Name </label>
+                                <input id="nameoftheuser" type="text" name='s_name' value={formData.s_name} readOnly={ViewOnly} onChange={handleChange} placeholder='e.g. Ashok Tripathi ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg ${ViewOnly ? 'bg-slate-50 text-slate-500' : 'bg-white' }`}required />
                             </div>
                             <div >
-                                <label htmlFor="mothersoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's  Mother's Name </label>
-                                <input id="mothersoftheuser" type="text" name='s_mother_name' value={formData.s_mother_name} onChange={handleChange} placeholder='e.g. Tulasi Tripathi ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ${ViewOnly ? 'bg-slate-500' : 'bg-white'}`} required />
+                                <label htmlFor="mothersoftheuser" className='text-slate-700 text-sm font-medium mb-1 block'> User's  Mother's Name </label>
+                                <input id="mothersoftheuser" type="text" name='s_mother_name' value={formData.s_mother_name} onChange={handleChange} placeholder='e.g. Tulasi Tripathi ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ${ViewOnly ? 'bg-slate-50 text-slate-500' : 'bg-white'}`} required />
                             </div>
                             <div >
-                                <label htmlFor="fathersoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's  Father's Name </label>
-                                <input id="fathersoftheuser" type="text" name='s_father_name' value={formData.s_father_name} onChange={handleChange} placeholder='e.g. Rama Krushna Tripathi ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ${ViewOnly ? 'bg-slate-500' : 'bg-white'}`} required />
+                                <label htmlFor="fathersoftheuser" className='text-slate-700 text-sm font-medium mb-1 block'> User's  Father's Name </label>
+                                <input id="fathersoftheuser" type="text" name='s_father_name' value={formData.s_father_name} onChange={handleChange} placeholder='e.g. Rama Krushna Tripathi ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ${ViewOnly ? 'bg-slate-50 text-slate-500' : 'bg-white'}`} required />
                             </div>
                             <div >
-                                <label htmlFor="phonenumbersoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's Phone Number </label>
-                                <input id="phonenumbersoftheuser" type="number" name='s_phone_number' value={formData.s_phone_number} onChange={handleChange} placeholder='e.g. 9876543210 ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ${ViewOnly ? 'bg-slate-500' : 'bg-white'}`} required minLength={0} maxLength={10} pattern="[0-9]*" />
+                                <label htmlFor="phonenumbersoftheuser" className='text-slate-700 text-sm font-medium mb-1 block'> User's Phone Number </label>
+                                <input id="phonenumbersoftheuser" type="number" name='s_phone_number' value={formData.s_phone_number} onChange={handleChange} placeholder='e.g. 9876543210 ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ${ViewOnly ? 'bg-slate-50 text-slate-500' : 'bg-white'}`} required minLength={0} maxLength={10} pattern="[0-9]*" />
                             </div>
                             <div >
-                                <label htmlFor="addmissiondateoftheuser" className='block text-sm font-medium text-slate-700 mb-1'> User's Addmission Date </label>
-                                <input id="addmissiondateoftheuser" type="date" name='s_addmission_date' value={formData.s_addmission_date} onChange={handleChange} placeholder='e.g. Ashok Tripathi ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ${ViewOnly ? 'bg-slate-500' : 'bg-white'}`} required />
+                                <label htmlFor="addmissiondateoftheuser" className='text-slate-700 text-sm font-medium mb-1 block'> User's Addmission Date </label>
+                                <input id="addmissiondateoftheuser" type="date" name='s_addmission_date' value={formData.s_addmission_date} onChange={handleChange} placeholder='e.g. Ashok Tripathi ' className={`w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 ${ViewOnly ? 'bg-slate-50 text-slate-500' : 'bg-white'}`} required />
                             </div>
                             <div className='flex gap-3 mt-8'>
-                                <button type='button' onClick={onClose} className='flex-1 px-4 py-2 border rounded-lg hover:bg-slate-50 transition-colors '> Cancel / Close </button>
-                                {!ViewOnly && (
-                                    <button type="submit" className='flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg'>
-                                        Save User
-                                    </button>
-                                )}
+                                <button type="button" onClick={onClose} className='flex-1 px-4 py-2 border rounded-lg hover:bg-slate-50'>
+                                    {ViewOnly ? "Close" : "Cancel"}
+                                </button>
+                                <button type='submit' className=' flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700'>
+                                    Save User
+                                </button>
                                 {/* <input type='text'
                                     // className='flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-md transition-all' 
                                     name='s_name' value={formData.s_name} onChange={handleChange} readonly={ViewOnly} // This will make the input field read-only when ViewOnly is true, preventing any changes to the user's name in view mode. 
